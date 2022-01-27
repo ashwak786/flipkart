@@ -1,0 +1,27 @@
+<repository lastmodified='20220127124440.931'>
+  <resource id='myntra/1.0.0.SNAPSHOT' symbolicname='myntra' presentationname='amazon' uri='myntra/shopping/1.0-SNAPSHOT/shopping-1.0-SNAPSHOT.jar' version='1.0.0.SNAPSHOT'>
+    <description>myntra</description>
+    <size>4374</size>
+    <license>http://www.gnu.org/licenses/lgpl-2.1.txt</license>
+    <capability name='bundle'>
+      <p n='symbolicname' v='myntra'/>
+      <p n='presentationname' v='amazon'/>
+      <p n='version' t='version' v='1.0.0.SNAPSHOT'/>
+      <p n='manifestversion' v='2'/>
+    </capability>
+    <capability name='package'>
+      <p n='package' v='myntra'/>
+      <p n='version' t='version' v='0.0.0'/>
+      <p n='uses:' v='com.vaadin.ui,com.vaadin,pl.net.bluesoft.rnd.processtool.bpm,pl.net.bluesoft.rnd.processtool.ui.widgets,pl.net.bluesoft.rnd.util.i18n,pl.net.bluesoft.rnd.processtool.ui.widgets.annotations,pl.net.bluesoft.rnd.processtool.ui.widgets.impl,pl.net.bluesoft.rnd.processtool.model.config'/>
+    </capability>
+    <require name='package' filter='(&amp;(package=com.vaadin))' extend='false' multiple='false' optional='false'>Import package com.vaadin</require>
+    <require name='package' filter='(&amp;(package=com.vaadin.ui))' extend='false' multiple='false' optional='false'>Import package com.vaadin.ui</require>
+    <require name='package' filter='(&amp;(package=myntra))' extend='false' multiple='false' optional='false'>Import package myntra</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.processtool.bpm))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.processtool.bpm</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.processtool.model.config))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.processtool.model.config</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.processtool.ui.widgets))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.processtool.ui.widgets</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.processtool.ui.widgets.annotations))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.processtool.ui.widgets.annotations</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.processtool.ui.widgets.impl))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.processtool.ui.widgets.impl</require>
+    <require name='package' filter='(&amp;(package=pl.net.bluesoft.rnd.util.i18n))' extend='false' multiple='false' optional='false'>Import package pl.net.bluesoft.rnd.util.i18n</require>
+  </resource>
+</repository>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2018 ABSA Group Limited
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>za.co.absa.hyperdrive</groupId>
+    <artifactId>hyperdrive_2.12</artifactId>
+    <packaging>pom</packaging>
+    <version>4.5.2</version>
+    <name>hyperdrive</name>
+    <description>Hyperdrive is a configurable and scalable ingestion platform that allows data movement and
+        transformation from the fast to the batch layer in a Lambda Architecture on top of Apache Spark.
+    </description>
+    <url>https://github.com/AbsaOSS/hyperdrive</url>
+
+    <modules>
+        <module>driver</module>
+        <module>parent-conf</module>
+        <module>component-archetype</module>
+        <module>component-scanner</module>
+
+        <module>api</module>
+        <module>ingestor-default</module>
+        <module>shared</module>
+        <module>compatibility-api</module>
+        <module>compatibility-provider</module>
+    </modules>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+        </repository>
+    </distributionManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/AbsaOSS/hyperdrive.git</connection>
+        <developerConnection>scm:git:ssh://github.com/AbsaOSS/hyperdrive.git</developerConnection>
+        <url>https://github.com/AbsaOSS/hyperdrive/tree/master</url>
+      <tag>v4.5.2</tag>
+  </scm>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>ABSA Group Limited</name>
+        <url>https://www.absa.africa</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>felipemmelo</id>
+            <name>Felipe Melo</name>
+            <timezone>Europe/Prague</timezone>
+            <url>https://github.com/felipemmelo</url>
+        </developer>
+        <developer>
+            <id>kevinwallimann</id>
+            <name>Kevin Wallimann</name>
+            <timezone>Europe/Prague</timezone>
+            <url>https://github.com/kevinwallimann</url>
+        </developer>
+        <developer>
+            <id>jozefbakus</id>
+            <name>Jozef Bakus</name>
+            <timezone>Europe/Prague</timezone>
+            <url>https://github.com/jozefbakus</url>
+        </developer>
+    </developers>
+
+    <properties>
+        <scala.maven.plugin.version>3.3.2</scala.maven.plugin.version>
+        <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+        <scala.cross.build.maven.plugin.version>0.2.1</scala.cross.build.maven.plugin.version>
+        <gpg.plugin.version>1.6</gpg.plugin.version>
+        <nexus.staging.plugin.version>1.6.8</nexus.staging.plugin.version>
+
+        <!-- Cross build properties -->
+        <default.scala.compat.version>2.12</default.scala.compat.version>
+        <default.scala.version>${scala_2.12.version}</default.scala.version>
+
+        <scala_2.11.version>2.11.12</scala_2.11.version>
+        <scala_2.12.version>2.12.10</scala_2.12.version>
+
+        <!-- Controlled by `scala-cross-build` plugin -->
+        <scala.version>2.12.10</scala.version>
+        <scala.compat.version>2.12</scala.compat.version>
+
+        <!-- Spark versions -->
+        <spark_2.version>2.4.3</spark_2.version>
+        <spark_3.version>3.1.2</spark_3.version>
+        <spark_2.sql.mongo.version>2.4.3</spark_2.sql.mongo.version>
+        <spark_3.sql.mongo.version>3.0.1</spark_3.sql.mongo.version>
+        <spark_2.mongodb.driver.version>2.7.0</spark_2.mongodb.driver.version>
+        <spark_3.mongodb.driver.version>4.0.5</spark_3.mongodb.driver.version>
+
+        <!-- Default versions -->
+        <spark.compat.version />
+        <spark.version />
+        <spark.sql.mongo.version />
+        <mongodb.driver.version />
+
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.plugin.version}</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <releaseProfiles>deploy</releaseProfiles>
+                    <username>git</username> <!-- Make sure git-push is not tried with local user -->
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.wajda</groupId>
+                <artifactId>scala-cross-build-maven-plugin</artifactId>
+                <version>${scala.cross.build.maven.plugin.version}</version>
+                <configuration>
+                    <scalaBinaryVersionProperty>scala.compat.version</scalaBinaryVersionProperty>
+                    <scalaVersionProperty>scala.version</scalaVersionProperty>
+                    <defaultScalaBinaryVersion>${default.scala.compat.version}</defaultScalaBinaryVersion>
+                    <defaultScalaVersion>${default.scala.version}</defaultScalaVersion>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <profiles>
+        <!-- Cross-building profiles -->
+        <profile>
+            <id>scala-2.11</id>
+            <properties>
+                <scala.compat.version>2.11</scala.compat.version>
+                <scala.version>${scala_2.11.version}</scala.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.12</id>
+            <properties>
+                <scala.compat.version>2.12</scala.compat.version>
+                <scala.version>${scala_2.12.version}</scala.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>spark-2</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spark.compat.version>spark-2</spark.compat.version>
+                <spark.version>${spark_2.version}</spark.version>
+                <spark.sql.mongo.version>${spark_2.sql.mongo.version}</spark.sql.mongo.version>
+                <mongodb.driver.version>${spark_2.mongodb.driver.version}</mongodb.driver.version>
+            </properties>
+            <modules>
+                <module>compatibility_spark-2</module>
+                <module>hyperdrive-release_spark-2</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>spark-3</id>
+            <properties>
+                <spark.compat.version>spark-3</spark.compat.version>
+                <spark.version>${spark_3.version}</spark.version>
+                <spark.sql.mongo.version>${spark_3.sql.mongo.version}</spark.sql.mongo.version>
+                <mongodb.driver.version>${spark_3.mongodb.driver.version}</mongodb.driver.version>
+            </properties>
+            <modules>
+                <module>compatibility_spark-3</module>
+                <module>hyperdrive-release_spark-3</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>deploy</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>net.alchim31.maven</groupId>
+                        <artifactId>scala-maven-plugin</artifactId>
+                        <version>${scala.maven.plugin.version}</version>
+                        <configuration>
+                            <scalaVersion>${scala.version}</scalaVersion>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>doc-jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${gpg.plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>${nexus.staging.plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                            <stagingProgressTimeoutMinutes>15</stagingProgressTimeoutMinutes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>license-check</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.rat</groupId>
+                        <artifactId>apache-rat-plugin</artifactId>
+                        <version>0.13</version>
+                        <executions>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>check</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/build.yml</exclude>
+                                <exclude>**/CODEOWNERS</exclude>
+                                <exclude>.editorconfig</exclude>
+                                <exclude>**/*.MockMaker</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>aperteworkflow-core</artifactId>
+        <groupId>org.aperteworkflow</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <name>Aperte Workflow Core</name>
+
+    <packaging>pom</packaging>
+    <artifactId>core</artifactId>
+
+    <modules>
+        <module>model</module>
+        <module>gui-commons</module>
+        <module>base-gui</module>
+        <module>integration</module>
+        <module>integration-interface</module>
+        <module>jbpm-context</module>
+        <module>jbpm-gui</module>
+        <module>editor</module>
+        <module>editor-interface</module>
+    </modules>
+
+</project>

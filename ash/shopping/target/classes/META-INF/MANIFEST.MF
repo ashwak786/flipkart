@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-Description: myntra
+Bundle-License: http://www.gnu.org/licenses/lgpl-2.1.txt
+Bundle-SymbolicName: myntra
+Built-By: ubuntu
+Bundle-ManifestVersion: 2
+Bnd-LastModified: 1643287480312
+Import-Package: com.vaadin,com.vaadin.ui,myntra,pl.net.bluesoft.rnd.pr
+ ocesstool.bpm,pl.net.bluesoft.rnd.processtool.model.config,pl.net.blu
+ esoft.rnd.processtool.ui.widgets,pl.net.bluesoft.rnd.processtool.ui.w
+ idgets.annotations,pl.net.bluesoft.rnd.processtool.ui.widgets.impl,pl
+ .net.bluesoft.rnd.util.i18n
+Tool: Bnd-0.0.357
+Export-Package: myntra;uses:="com.vaadin.ui,com.vaadin,pl.net.bluesoft
+ .rnd.processtool.bpm,pl.net.bluesoft.rnd.processtool.ui.widgets,pl.ne
+ t.bluesoft.rnd.util.i18n,pl.net.bluesoft.rnd.processtool.ui.widgets.a
+ nnotations,pl.net.bluesoft.rnd.processtool.ui.widgets.impl,pl.net.blu
+ esoft.rnd.processtool.model.config"
+Bundle-Version: 1.0.0.SNAPSHOT
+Bundle-Name: amazon
+ProcessTool-Widget-Enhancement: myntra.SampleWidget
+Created-By: Apache Maven Bundle Plugin
+Build-Jdk: 1.8.0_312
+
